@@ -1,7 +1,9 @@
 package com.xg.impl;
 
 import com.xg.entitys.Chapter;
+import com.xg.enums.SiteEnum;
 import com.xg.interfaces.IChapterCrawler;
+import com.xg.util.ChapterUtil;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -29,7 +31,8 @@ public class AbstractChapterCrawler implements IChapterCrawler {
 
 
             try {
-                result = EntityUtils.toString(httpResponse.getEntity());
+                //result = EntityUtils.toString(httpResponse.getEntity(),"gbk");
+                result = EntityUtils.toString(httpResponse.getEntity(), ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("charset"));
 
             } finally {
                 httpResponse.close();
@@ -49,13 +52,16 @@ public class AbstractChapterCrawler implements IChapterCrawler {
             String result = crawl(url);
             //System.out.println(result);
            Document document= Jsoup.parse(result);
-          Elements es= document.select("#list dd a");
+           document.setBaseUri(url); //automatically match absolute and relative paths
+          //Elements es= document.select("#list dd a");
+            Elements es= document.select(ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("chapter-list-selector"));
           List<Chapter> list=new ArrayList<Chapter>();
           for (Element e:es){
               //System.out.println(e);
               Chapter chapter=new Chapter();
               chapter.setTitile(e.text());
-              chapter.setUrl("http://www.xs.la/"+e.attr("href"));
+              //chapter.setUrl("http://www.xs.la/"+e.attr("href"));
+              chapter.setUrl(e.absUrl("href"));
               list.add(chapter);
           }
             return list;
