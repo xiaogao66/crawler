@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<sites>
+    <site>
+        <title>xs</title>
+        <charset>utf-8</charset>
+        <url>http://www.xs.la/</url>
+        <chapter-list-selector>#list dd a</chapter-list-selector>
+    </site>
+    <site>
+        <title>23wx</title>
+        <charset>gbk</charset>
+        <url>http://www.23wx.cc/ </url>
+        <chapter-list-selector>#list dd a</chapter-list-selector>
+    </site>
+</sites>
