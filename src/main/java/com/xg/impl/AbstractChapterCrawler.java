@@ -20,32 +20,8 @@ import java.util.List;
 /**
  * Created by xg on 2017/9/8.
  */
-public class AbstractChapterCrawler implements IChapterCrawler {
-    protected String crawl(String url) throws Exception {
-        CloseableHttpClient httpClient = null;
-        String result = null;
-        try {
-            httpClient = HttpClientBuilder.create().build();
-            HttpGet httpGet = new HttpGet(url);
-            CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
+public class AbstractChapterCrawler extends AbstractCrawler implements IChapterCrawler {
 
-
-            try {
-                //result = EntityUtils.toString(httpResponse.getEntity(),"gbk");
-                result = EntityUtils.toString(httpResponse.getEntity(), ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("charset"));
-
-            } finally {
-                httpResponse.close();
-            }
-            return result;
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            if (httpClient != null)
-                httpClient.close();
-        }
-    }
 
     public List<Chapter> getChapter(String url) {
         try {

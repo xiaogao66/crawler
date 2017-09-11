@@ -9,8 +9,7 @@ import java.util.List;
  */
 public interface IChapterCrawler {
     /**
-     * 根据url获取完整的章节列表
-     *
+     *get chapter list by url
      */
     public List<Chapter> getChapter(String url);
 }
