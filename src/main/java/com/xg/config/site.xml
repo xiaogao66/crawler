@@ -20,4 +20,14 @@
         <chapter-detail-prev-selector>.bottem2 a,1</chapter-detail-prev-selector>
         <chapter-detail-next-selector>.bottem2 a,3</chapter-detail-next-selector>
     </site>
+    <site>
+        <title>bxwx</title>
+        <charset>utf-8</charset>
+        <url>http://www.bxwx9.org/ </url>
+        <chapter-list-selector>#TabCss dd a</chapter-list-selector>
+        <chapter-detail-title-selector>#title</chapter-detail-title-selector>
+        <chapter-detail-content-selector>#content</chapter-detail-content-selector>
+        <chapter-detail-prev-selector>#footlink a,2</chapter-detail-prev-selector>
+        <chapter-detail-next-selector>#footlink a,4</chapter-detail-next-selector>
+    </site>
 </sites>

@@ -51,7 +51,7 @@ public class AbstractChapterDetailCrawler extends AbstractCrawler implements ICh
         String[] subSpilts = new String[2];
         if (splits.length == 1) {
             subSpilts[0] = splits[0];
-            subSpilts[1] = splits[0];
+            subSpilts[1] ="0";
             return subSpilts;
         } else {
             return splits;

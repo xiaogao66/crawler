@@ -4,11 +4,6 @@ import com.xg.entitys.Chapter;
 import com.xg.enums.SiteEnum;
 import com.xg.interfaces.IChapterCrawler;
 import com.xg.util.ChapterUtil;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -30,6 +25,8 @@ public class AbstractChapterCrawler extends AbstractCrawler implements IChapterC
            Document document= Jsoup.parse(result);
            document.setBaseUri(url); //automatically match absolute and relative paths
           //Elements es= document.select("#list dd a");
+
+
             Elements es= document.select(ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("chapter-list-selector"));
           List<Chapter> list=new ArrayList<Chapter>();
           for (Element e:es){

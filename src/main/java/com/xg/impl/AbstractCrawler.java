@@ -1,7 +1,5 @@
 package com.xg.impl;
-
-import com.xg.enums.SiteEnum;
-import com.xg.util.ChapterUtil;
+import com.xg.util.CharsetUtil;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -23,7 +21,12 @@ public abstract class AbstractCrawler {
 
             try {
                 //result = EntityUtils.toString(httpResponse.getEntity(),"gbk");
-                result = EntityUtils.toString(httpResponse.getEntity(), ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("charset"));
+                //result = EntityUtils.toString(httpResponse.getEntity(), ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("charset"));
+               // result = EntityUtils.toString(httpResponse.getEntity());
+                String charset=CharsetUtil.getCharset(url);
+                result = EntityUtils.toString(httpResponse.getEntity(),charset);
+
+
 
             } finally {
                 httpResponse.close();

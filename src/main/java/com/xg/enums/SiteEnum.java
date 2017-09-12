@@ -5,7 +5,8 @@ package com.xg.enums;
  */
 public enum SiteEnum {
     WX(1, "http://www.23wx.cc"),
-    XS(2, "http://www.xs.la");
+    XS(2, "http://www.xs.la"),
+    BXWX(3,"http://www.bxwx9.org");
     private int id;
     private String url;
 
@@ -37,7 +38,7 @@ public enum SiteEnum {
             case 2:
                 return XS;
             default:
-                throw new RuntimeException("id=" + id + "不支持此站点");
+                throw new RuntimeException("id=" + id + "This site is not supported");
         }
     }
     public static SiteEnum getEnumByUrl(String url){
@@ -47,6 +48,6 @@ public enum SiteEnum {
                 return s;
             }
         }
-        throw  new RuntimeException("url="+url+"不支持此站点");
+        throw  new RuntimeException("url="+url+"This site is not supported");
     }
 }

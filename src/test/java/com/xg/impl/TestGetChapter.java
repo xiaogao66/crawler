@@ -18,11 +18,24 @@ public class TestGetChapter {
     public void test() {
         IChapterCrawler crawler = new ChapterCrawler();
         //List<Chapter> chapters= crawler.getChapter("http://www.xs.la/0_5/");
-        List<Chapter> chapters = crawler.getChapter("http://www.23wx.cc/du/83/83293/");
+        //List<Chapter> chapters = crawler.getChapter("http://www.23wx.cc/du/83/83293/");
+        List<Chapter> chapters = crawler.getChapter("http://www.bxwx9.org/b/70/70093/");
         for (Chapter chapter : chapters) {
             System.out.println(chapter.toString());
         }
     }
+    //bxwx
+    @Test
+    public void testGetBXWXChapter() {
+        IChapterCrawler crawler = new BXWXChapterCrawler();
+        //List<Chapter> chapters= crawler.getChapter("http://www.xs.la/0_5/");
+        //List<Chapter> chapters = crawler.getChapter("http://www.23wx.cc/du/83/83293/");
+        List<Chapter> chapters = crawler.getChapter("http://www.bxwx9.org/b/70/70093/");
+        for (Chapter chapter : chapters) {
+            System.out.println(chapter.toString());
+        }
+    }
+
 
     @Test
     public void testGetSiteRule() {
@@ -34,7 +47,8 @@ public class TestGetChapter {
     public void testGetChapterDetail() {
         IChapterDetailCrawler chapterDetailCrawler = new ChapterDetailCrawler();
         //System.out.println(chapterDetailCrawler.getChapterDetail("http://www.23wx.cc/du/103/103839/21481218.html"));
-        System.out.println(chapterDetailCrawler.getChapterDetail("http://www.xs.la/46_46358/2436876.html"));
+        //System.out.println(chapterDetailCrawler.getChapterDetail("http://www.xs.la/46_46358/2436876.html"));
+        System.out.println(chapterDetailCrawler.getChapterDetail("http://www.bxwx9.org/b/70/70093/11969974.html"));
     }
 }
 
