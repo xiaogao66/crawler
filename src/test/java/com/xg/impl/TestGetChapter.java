@@ -1,10 +1,12 @@
 package com.xg.impl;
 
+import com.xg.config.Configuration;
 import com.xg.entitys.Chapter;
 import com.xg.enums.SiteEnum;
 import com.xg.interfaces.IChapterCrawler;
-import com.xg.impl.ChapterCrawler;
 import com.xg.interfaces.IChapterDetailCrawler;
+import com.xg.interfaces.INovelDownload;
+import com.xg.util.ChapterDetailCrawlerFactory;
 import com.xg.util.ChapterUtil;
 import org.junit.Test;
 
@@ -48,7 +50,19 @@ public class TestGetChapter {
         IChapterDetailCrawler chapterDetailCrawler = new ChapterDetailCrawler();
         //System.out.println(chapterDetailCrawler.getChapterDetail("http://www.23wx.cc/du/103/103839/21481218.html"));
         //System.out.println(chapterDetailCrawler.getChapterDetail("http://www.xs.la/46_46358/2436876.html"));
-        System.out.println(chapterDetailCrawler.getChapterDetail("http://www.bxwx9.org/b/70/70093/11969974.html"));
+        //System.out.println(chapterDetailCrawler.getChapterDetail("http://www.bxwx9.org/b/70/70093/11969974.html"));
+        System.out.println(ChapterDetailCrawlerFactory.getChapterDetailCrawler("http://www.bxwx9.org/b/70/70093/11969974.html").getChapterDetail("http://www.bxwx9.org/b/70/70093/11969974.html"));
+
+    }
+
+
+    @Test
+    public void testDownload() {
+        INovelDownload download = new NovelDownload();
+        Configuration config = new Configuration();
+        config.setPath("D:/1");
+        config.setSize(100);
+        download.download("http://www.23wx.cc/du/83/83293/", config);
     }
 }
 
