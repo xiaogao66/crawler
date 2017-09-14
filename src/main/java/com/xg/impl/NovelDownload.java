@@ -41,7 +41,7 @@ public class NovelDownload implements INovelDownload {
             if (i == maxThreadSize - 1) {
                 int toIndex = chapters.size() - 1;
             }
-            int toIndex = i == maxThreadSize - 1 ? chapters.size() - 1 : i * (config.getSize()) + config.getSize() - 1;
+            int toIndex = i == maxThreadSize - 1 ? chapters.size()  : i * (config.getSize()) + config.getSize();
             downloadTaskAlloc.put(fromIndex + "-" + toIndex, chapters.subList(fromIndex, toIndex));
         }
         ExecutorService service = Executors.newFixedThreadPool(maxThreadSize);
@@ -55,7 +55,7 @@ public class NovelDownload implements INovelDownload {
         for (Future<String> future : tasks
                 ) {
             try {
-                System.out.println(future.get()+",下载完成！");
+                System.out.println(future.get()+",download  finished");
             } catch (Exception e) {
                 e.printStackTrace();
             }
