@@ -17,7 +17,7 @@ public class AbstractChapterDetailCrawler extends AbstractCrawler implements ICh
         try {
 
             String result = super.crawl(url);
-            result = result.replace("&nbsp;", "  ").replace("<br />", "\n").replace("<br/>", "\n");
+            result = result.replace("&nbsp;", "  ").replace("<br />", "${line}").replace("<br/>", "${line}");
             Document document = Jsoup.parse(result);
             document.setBaseUri(url);
             Map<String, String> contexts = ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url));
@@ -29,7 +29,7 @@ public class AbstractChapterDetailCrawler extends AbstractCrawler implements ICh
             chapterDetail.setTitle(document.select(splits[0]).get(Integer.parseInt(splits[1])).text());
             //get content
             String contentSelector = contexts.get("chapter-detail-content-selector");
-            chapterDetail.setContent(document.select(contentSelector).first().text());
+            chapterDetail.setContent(document.select(contentSelector).first().text().replace("${line}", "\n"));
             //get prev page address
             String prevSelector = contexts.get("chapter-detail-prev-selector");
             splits = prevSelector.split("\\,");
