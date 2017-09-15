@@ -6,8 +6,9 @@ import com.xg.entitys.ChapterDetail;
 import com.xg.interfaces.IChapterCrawler;
 import com.xg.interfaces.IChapterDetailCrawler;
 import com.xg.interfaces.INovelDownload;
-import com.xg.util.ChapterCrawlerFactory;
 import com.xg.util.ChapterDetailCrawlerFactory;
+import com.xg.util.ChapterUtil;
+import org.apache.http.conn.ConnectTimeoutException;
 
 
 import java.io.File;
@@ -43,13 +44,19 @@ public class NovelDownload implements INovelDownload {
             }
             int toIndex = i == maxThreadSize - 1 ? chapters.size()  : i * (config.getSize()) + config.getSize();
             downloadTaskAlloc.put(fromIndex + "-" + toIndex, chapters.subList(fromIndex, toIndex));
+
         }
         ExecutorService service = Executors.newFixedThreadPool(maxThreadSize);
         Set<String> keySet = downloadTaskAlloc.keySet();
         List<Future<String>> tasks = new ArrayList<Future<String>>();
+        String subPath=url.split("//")[1];
+        //String savePath= config.getPath()+"/"+ SiteEnum.getEnumByUrl(url).getUrl();
+        String savePath= config.getPath()+"/"+subPath;
+        //new File(savePath).mkdir();
+        new File(savePath).mkdirs();
         for (String key : keySet) {
 
-            tasks.add( service.submit(new DownloadCallable(config.getPath() + "/" + key + ".txt", downloadTaskAlloc.get(key))));
+            tasks.add( service.submit(new DownloadCallable(savePath + "/" + key + ".txt", downloadTaskAlloc.get(key),config.getTryTimes())));
         }
         service.shutdown();
         for (Future<String> future : tasks
@@ -59,20 +66,22 @@ public class NovelDownload implements INovelDownload {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
         }
-        return null;
+        ChapterUtil.multiFileMerge(savePath,null,true);
+        //ChapterUtil.multiFileMerge("D:/1",null,true);
+        return savePath+"/merge.txt";
     }
 
     class DownloadCallable implements Callable<String> {
         private List<Chapter> chapters;
         private String path;
         PrintWriter out = null;
+        int tryTime;
 
-        public DownloadCallable(String path, List<Chapter> chapters) {
+        public DownloadCallable(String path, List<Chapter> chapters,int tryTime) {
             this.path = path;
             this.chapters = chapters;
+            this.tryTime =tryTime;
         }
 
         public String call() throws Exception {
@@ -80,11 +89,18 @@ public class NovelDownload implements INovelDownload {
                 out = new PrintWriter(new File(path));
                 for (Chapter chapter : chapters
                         ) {
-                    IChapterDetailCrawler chapterDetailCrawler = ChapterDetailCrawlerFactory.getChapterDetailCrawler(chapter.getUrl());
-                    ChapterDetail detail = chapterDetailCrawler.getChapterDetail(chapter.getUrl());
-                    out.println(detail.getTitle());
-                    out.println(detail.getContent());
+                    for (int i = 0; i< tryTime; i++) {
+                        try {
+                            IChapterDetailCrawler chapterDetailCrawler = ChapterDetailCrawlerFactory.getChapterDetailCrawler(chapter.getUrl());
+                            ChapterDetail detail = chapterDetailCrawler.getChapterDetail(chapter.getUrl());
+                            out.println(detail.getTitle());
+                            out.println(detail.getContent());
+                            break;
+                        } catch (RuntimeException e){
+                            System.err.println("try [" + (i + 1) + "/" + tryTime + "time  chapter="+chapter.getTitile()+"] download failed！");
+                        }
 
+                    }
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);

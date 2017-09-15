@@ -61,8 +61,14 @@ public class TestGetChapter {
         INovelDownload download = new NovelDownload();
         Configuration config = new Configuration();
         config.setPath("D:/1");
-        config.setSize(100);
-        download.download("http://www.23wx.cc/du/83/83293/", config);
+        config.setSize(50);
+        //download.download("http://www.bxwx9.org/b/70/70093/", config);
+        download.download("http://www.23wx.cc/du/41/41316/", config);
+    }
+
+    @Test
+    public void testMultFileMerge(){
+        ChapterUtil.multiFileMerge("D:/1",null,true);
     }
 }
 
