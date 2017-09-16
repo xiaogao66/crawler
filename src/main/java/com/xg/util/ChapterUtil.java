@@ -11,6 +11,8 @@ import org.xml.sax.SAXException;
 
 
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -76,27 +78,51 @@ public final class ChapterUtil {
                 }
             }
         });
-        PrintWriter out=null;
+        PrintWriter out = null;
 
         try {
-            out=new PrintWriter(new File(mergeToFile),"UTF-8");
-            for (File file:files
-                 ) {
-                BufferedReader bufferedReader=new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));
-                String line=null;
-                while ((line=bufferedReader.readLine())!=null){
+            out = new PrintWriter(new File(mergeToFile), "UTF-8");
+            for (File file : files
+                    ) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+                String line = null;
+                while ((line = bufferedReader.readLine()) != null) {
                     out.println(line);
                 }
                 bufferedReader.close();
-                if(dleteSubFile){
+                if (dleteSubFile) {
                     file.delete();
                 }
             }
 
         } catch (IOException e) {
-            throw  new RuntimeException(e);
-        }finally {
+            throw new RuntimeException(e);
+        } finally {
             out.close();
         }
+    }
+
+    public static int getNovelStatus(String status) {
+        if (status.contains("连载")) {
+            return 1;
+        } else if (status.contains("完结") || status.contains("完成")) {
+            return 2;
+        } else
+            throw new RuntimeException("not supported" + status);
+    }
+
+    public static Date getDate(String dateStr, String pattern) throws ParseException {
+        if ("MM-dd".equals(pattern)) {
+            pattern = "yyyy-MM-dd";
+            dateStr = getDateField(Calendar.YEAR) + "-" + dateStr;
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        Date date = sdf.parse(dateStr);
+        return date;
+    }
+
+    public static String getDateField(int field) {
+        Calendar calendar = new GregorianCalendar();
+        return calendar.get(field) + "";
     }
 }
