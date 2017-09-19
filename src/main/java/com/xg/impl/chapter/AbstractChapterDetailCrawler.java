@@ -3,7 +3,7 @@ package com.xg.impl;
 import com.xg.entitys.ChapterDetail;
 import com.xg.enums.SiteEnum;
 import com.xg.interfaces.IChapterDetailCrawler;
-import com.xg.util.ChapterUtil;
+import com.xg.util.CrawlerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -20,7 +20,7 @@ public class AbstractChapterDetailCrawler extends AbstractCrawler implements ICh
             result = result.replace("&nbsp;", "  ").replace("<br />", "${line}").replace("<br/>", "${line}");
             Document document = Jsoup.parse(result);
             document.setBaseUri(url);
-            Map<String, String> contexts = ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url));
+            Map<String, String> contexts = CrawlerUtil.getParseText(SiteEnum.getEnumByUrl(url));
             ChapterDetail chapterDetail = new ChapterDetail();
             //get title
             String titleSelector = contexts.get("chapter-detail-title-selector");

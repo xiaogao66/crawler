@@ -7,8 +7,7 @@ import com.xg.interfaces.IChapterCrawler;
 import com.xg.interfaces.IChapterDetailCrawler;
 import com.xg.interfaces.INovelDownload;
 import com.xg.util.ChapterDetailCrawlerFactory;
-import com.xg.util.ChapterUtil;
-import org.apache.http.conn.ConnectTimeoutException;
+import com.xg.util.CrawlerUtil;
 
 
 import java.io.File;
@@ -67,8 +66,8 @@ public class NovelDownload implements INovelDownload {
                 e.printStackTrace();
             }
         }
-        ChapterUtil.multiFileMerge(savePath,null,true);
-        //ChapterUtil.multiFileMerge("D:/1",null,true);
+        CrawlerUtil.multiFileMerge(savePath,null,true);
+        //CrawlerUtil.multiFileMerge("D:/1",null,true);
         return savePath+"/merge.txt";
     }
 

@@ -3,7 +3,7 @@ package com.xg.impl;
 import com.xg.entitys.Chapter;
 import com.xg.enums.SiteEnum;
 import com.xg.interfaces.IChapterCrawler;
-import com.xg.util.ChapterUtil;
+import com.xg.util.CrawlerUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -27,7 +27,7 @@ public class AbstractChapterCrawler extends AbstractCrawler implements IChapterC
           //Elements es= document.select("#list dd a");
 
 
-            Elements es= document.select(ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("chapter-list-selector"));
+            Elements es= document.select(CrawlerUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("chapter-list-selector"));
           List<Chapter> list=new ArrayList<Chapter>();
           for (Element e:es){
               //System.out.println(e);

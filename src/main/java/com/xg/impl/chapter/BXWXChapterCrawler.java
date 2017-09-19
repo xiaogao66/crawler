@@ -1,8 +1,7 @@
-package com.xg.impl;
+package com.xg.impl.chapter;
 
 import com.xg.entitys.Chapter;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
