@@ -72,7 +72,7 @@ public abstract class AbstractNovelCrawler extends AbstractCrawler implements IN
 
     public Iterator<List<Novel>> iterator(String firstPage, Integer maxTryTime) {
         nextPage = firstPage;
-        return null;
+        return new NovelIterator(maxTryTime);
     }
 
 /*    private class NovelIterator implements Iterator<List<Novel>> {
