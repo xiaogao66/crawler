@@ -1,7 +1,7 @@
 package com.xg.util;
 
 import com.xg.enums.SiteEnum;
-import com.xg.impl.ChapterDetailCrawler;
+import com.xg.impl.chapter.ChapterDetailCrawler;
 import com.xg.interfaces.IChapterDetailCrawler;
 
 /**

@@ -18,7 +18,7 @@ import java.util.*;
 /**
  * Created by xg on 2017/9/9.
  */
-public final class ChapterUtil {
+public final class CrawlerUtil {
     private static final Map<SiteEnum, Map<String, String>> CHAPTER_MAP = new HashMap<SiteEnum, Map<String, String>>();
 
     static {
@@ -105,7 +105,7 @@ public final class ChapterUtil {
     public static int getNovelStatus(String status) {
         if (status.contains("连载")) {
             return 1;
-        } else if (status.contains("完结") || status.contains("完成")) {
+        } else if (status.contains("完结") || status.contains("完")) {
             return 2;
         } else
             throw new RuntimeException("not supported" + status);

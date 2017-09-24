@@ -1,4 +1,4 @@
-package com.xg.impl;
+package com.xg.impl.download;
 
 import com.xg.config.Configuration;
 import com.xg.entitys.Chapter;

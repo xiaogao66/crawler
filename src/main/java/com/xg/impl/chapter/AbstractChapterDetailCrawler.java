@@ -1,7 +1,8 @@
-package com.xg.impl;
+package com.xg.impl.chapter;
 
 import com.xg.entitys.ChapterDetail;
 import com.xg.enums.SiteEnum;
+import com.xg.impl.AbstractCrawler;
 import com.xg.interfaces.IChapterDetailCrawler;
 import com.xg.util.CrawlerUtil;
 import org.jsoup.Jsoup;

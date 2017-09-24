@@ -6,7 +6,9 @@ package com.xg.enums;
 public enum SiteEnum {
     WX(1, "http://www.23wx.cc"),
     XS(2, "http://www.xs.la"),
-    BXWX(3,"http://www.bxwx9.org");
+    BXWX(3,"http://www.bxwx9.org"),
+    KSZ(4,"http://www.kanshuzhong.com");
+
     private int id;
     private String url;
 

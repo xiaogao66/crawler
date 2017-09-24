@@ -24,7 +24,7 @@ public abstract class AbstractCrawler {
 
             try {
                 //result = EntityUtils.toString(httpResponse.getEntity(),"gbk");
-                //result = EntityUtils.toString(httpResponse.getEntity(), ChapterUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("charset"));
+                //result = EntityUtils.toString(httpResponse.getEntity(), CrawlerUtil.getParseText(SiteEnum.getEnumByUrl(url)).get("charset"));
                 // result = EntityUtils.toString(httpResponse.getEntity());
                 String charset = CharsetUtil.getCharset(url);
                 result = EntityUtils.toString(httpResponse.getEntity(), charset);

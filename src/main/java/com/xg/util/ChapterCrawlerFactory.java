@@ -1,8 +1,8 @@
 package com.xg.util;
 
 import com.xg.enums.SiteEnum;
-import com.xg.impl.BXWXChapterCrawler;
-import com.xg.impl.ChapterCrawler;
+import com.xg.impl.chapter.BXWXChapterCrawler;
+import com.xg.impl.chapter.ChapterCrawler;
 import com.xg.interfaces.IChapterCrawler;
 
 /**
